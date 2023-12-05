@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Middleware\CheckAge;
+use App\Http\Controllers\profileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,5 +52,7 @@ Route::middleware([CheckAge::class])->group(function () {
 });
 
 $current_route = Route::current();
+
+Route::get('/user/{id}', [profileController::class, 'show']);
 
 
