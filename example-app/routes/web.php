@@ -71,9 +71,9 @@ Route::get('/add_flight', function(){
 });
 
 Route::get('/flights', function(){
-    foreach (Flight::all() as $flight) {
-        echo $flight->Name;
-    }
+    $flight = Flight::find(1);
+    $flight->refresh();
+    echo $flight->Name;
 });
 
 
