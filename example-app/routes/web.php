@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Middleware\CheckAge;
 use App\Http\Controllers\profileController;
+use App\Models\Flight;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,5 +55,25 @@ Route::middleware([CheckAge::class])->group(function () {
 $current_route = Route::current();
 
 Route::get('/user/{id}', [profileController::class, 'show']);
+
+# try to add data
+Route::get('/add_flight', function(){
+    $flight = new Flight();
+    $flight->Name = "Sydney to London";
+    $flight->flight_id = 1;
+    $flight->options = "test";
+    $flight->delayed = 0;
+    $flight->updated_at = 10;
+    $flight->created_at = 10;
+    $flight->save();
+
+    return "Flight created";
+});
+
+Route::get('/flights', function(){
+    foreach (Flight::all() as $flight) {
+        echo $flight->Name;
+    }
+});
 
 
