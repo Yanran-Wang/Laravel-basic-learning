@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Jobs\SendEmailJob;
 
 
 class LoginController extends Controller
@@ -20,6 +21,11 @@ class LoginController extends Controller
     }
 
     public function register(){
+        
+        # send email (queue)
+        $user = User::find(2);
+        dispatch(new SendEmailJob($user));
+        
         return view('register');
     }
 
